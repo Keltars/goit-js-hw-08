@@ -68,7 +68,7 @@ const gallery = document.querySelector(".gallery");
 
 const markup = images.reduce((html, image) => {
   return (html += `<li class="gallery-item">
-    <a class="gallery-link" >
+    <a class="gallery-link" href="large-image.jpg">
     <img
     class="gallery-image"
     src="${image.preview}"
@@ -84,6 +84,7 @@ gallery.insertAdjacentHTML("beforeend", markup);
 gallery.addEventListener("click", onImageClick);
 
 function onImageClick(event) {
+  event.preventDefault();
   const alt = event.target.getAttribute("alt");
   if (!alt) return;
   const currentCard = images.find((image) => {
