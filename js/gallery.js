@@ -68,11 +68,11 @@ const gallery = document.querySelector(".gallery");
 
 const markup = images.reduce((html, image) => {
   return (html += `<li class="gallery-item">
-    <a class="gallery-link" href="large-image.jpg">
+    <a class="gallery-link" href="${image.original}">
     <img
     class="gallery-image"
     src="${image.preview}"
-    data-source="large-image.jpg"
+    data-source="${image.original}"
     alt="${image.description}"
     />
     </a>
@@ -85,17 +85,21 @@ gallery.addEventListener("click", onImageClick);
 
 function onImageClick(event) {
   event.preventDefault();
-  const alt = event.target.getAttribute("alt");
-  if (!alt) return;
+  const clickedImg = event.target.closest(".gallery-item");
+  if (!clickedImg) return;
+
+  const dataSource = event.target.getAttribute("data-source");
+  if (!dataSource) return;
+
   const currentCard = images.find((image) => {
-    return image.description === alt;
+    return image.original === dataSource;
   });
 
   const instance = basicLightbox.create(`
     <img
     class="gallery-image-modal"
     src="${currentCard.original}"
-    data-source="large-image.jpg"
+    data-source="${currentCard.original}"
     alt="${currentCard.description}"
     />
 `);
