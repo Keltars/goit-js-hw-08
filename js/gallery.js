@@ -92,16 +92,12 @@ function onImageClick(event) {
   });
 
   const instance = basicLightbox.create(`
-	<li class="gallery-item">
-    <a class="gallery-link" >
     <img
     class="gallery-image-modal"
     src="${currentCard.original}"
     data-source="large-image.jpg"
     alt="${currentCard.description}"
     />
-    </a>
-    </li>
 `);
   instance.show();
 }
